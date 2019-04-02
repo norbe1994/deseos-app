@@ -55,7 +55,8 @@ export class ListasComponent implements OnInit {
 					text: 'Editar',
 					handler: data => {
 						if (data.titulo.length === 0) return
-						this.deseosService.editarLista(lista.id, data.titulo)
+						lista.titulo = data.titulo
+						this.deseosService.guardarStorage()
 					},
 				},
 			],
