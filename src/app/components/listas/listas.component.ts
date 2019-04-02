@@ -50,6 +50,7 @@ export class ListasComponent implements OnInit {
 					role: 'cancel',
 					handler: () => {
 						console.log('cancelar')
+						this.lista.closeSlidingItems()
 					},
 				},
 				{
