@@ -46,4 +46,8 @@ export class Tab1Page {
 		})
 		alert.present()
 	}
+
+	irAListaSeleccionada(id: number) {
+		this.router.navigateByUrl(`/tabs/tab1/agregar/${id}`)
+	}
 }
