@@ -30,4 +30,18 @@ export class AgregarPage implements OnInit {
 		this.nombreItem = ''
 		this.deseosService.guardarStorage()
 	}
+
+	cambioCheck(item: ListaItem) {
+		const pendientes = this.lista.items.filter(itemData => !itemData.completado)
+			.length
+		if (pendientes === 0) {
+			this.lista.terminadaEn = new Date()
+			this.lista.terminada = true
+		} else {
+			this.lista.terminadaEn = null
+			this.lista.terminada = false
+		}
+		this.deseosService.guardarStorage()
+		console.log(this.deseosService.listas)
+	}
 }
