@@ -5,9 +5,11 @@ import { Lista } from '../models/lista.model'
 	providedIn: 'root',
 })
 export class DeseosService {
-	lista: Lista[] = []
+	listas: Lista[] = []
 
 	constructor() {
-		console.log('servicio inicializado')
+		const lista1 = new Lista('tareas1')
+		const lista2 = new Lista('tareas2')
+		this.listas.push(lista1, lista2)
 	}
 }
