@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { DeseosService } from 'src/app/services/deseos.service'
 import { Router } from '@angular/router'
+import { AlertController } from '@ionic/angular'
 
 @Component({
 	selector: 'app-listas',
@@ -10,7 +11,11 @@ import { Router } from '@angular/router'
 export class ListasComponent implements OnInit {
 	@Input() terminada = true
 
-	constructor(public deseosService: DeseosService, private router: Router) {}
+	constructor(
+		public deseosService: DeseosService,
+		private router: Router,
+		private alertController: AlertController,
+	) {}
 
 	ngOnInit() {}
 
@@ -24,5 +29,36 @@ export class ListasComponent implements OnInit {
 
 	borrarLista(id: number) {
 		this.deseosService.borrarLista(id)
+	}
+
+	async editarLista(id: number, titulo: string) {
+		const alert = await this.alertController.create({
+			header: 'Editar título de lista',
+			inputs: [
+				{
+					name: 'titulo',
+					type: 'text',
+					value: `${titulo}`,
+					placeholder: 'Título de la lista',
+				},
+			],
+			buttons: [
+				{
+					text: 'Cancelar',
+					role: 'cancel',
+					handler: () => {
+						console.log('cancelar')
+					},
+				},
+				{
+					text: 'Editar',
+					handler: data => {
+						if (data.titulo.length === 0) return
+						this.deseosService.editarLista(id, data.titulo)
+					},
+				},
+			],
+		})
+		alert.present()
 	}
 }

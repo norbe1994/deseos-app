@@ -23,6 +23,13 @@ export class DeseosService {
 		this.guardarStorage()
 	}
 
+	editarLista(id: number, titulo: string) {
+		this.listas.forEach(lista => {
+			if (lista.id === id) lista.titulo = titulo
+		})
+		this.guardarStorage()
+	}
+
 	obtenerLista(id: string | number) {
 		id = Number(id)
 		return this.listas.find(listaData => listaData.id === id)
