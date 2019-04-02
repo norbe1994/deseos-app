@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core'
 import { DeseosService } from 'src/app/services/deseos.service'
 import { Router } from '@angular/router'
 import { AlertController } from '@ionic/angular'
+import { Lista } from 'src/app/models/lista.model'
 
 @Component({
 	selector: 'app-listas',
@@ -31,14 +32,14 @@ export class ListasComponent implements OnInit {
 		this.deseosService.borrarLista(id)
 	}
 
-	async editarLista(id: number, titulo: string) {
+	async editarLista(lista: Lista) {
 		const alert = await this.alertController.create({
 			header: 'Editar título de lista',
 			inputs: [
 				{
 					name: 'titulo',
 					type: 'text',
-					value: `${titulo}`,
+					value: `${lista.titulo}`,
 					placeholder: 'Título de la lista',
 				},
 			],
@@ -54,7 +55,7 @@ export class ListasComponent implements OnInit {
 					text: 'Editar',
 					handler: data => {
 						if (data.titulo.length === 0) return
-						this.deseosService.editarLista(id, data.titulo)
+						this.deseosService.editarLista(lista.id, data.titulo)
 					},
 				},
 			],
