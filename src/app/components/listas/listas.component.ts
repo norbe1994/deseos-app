@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, ViewChild } from '@angular/core'
 import { DeseosService } from 'src/app/services/deseos.service'
 import { Router } from '@angular/router'
-import { AlertController } from '@ionic/angular'
+import { AlertController, IonList } from '@ionic/angular'
 import { Lista } from 'src/app/models/lista.model'
 
 @Component({
@@ -10,6 +10,7 @@ import { Lista } from 'src/app/models/lista.model'
 	styleUrls: ['./listas.component.scss'],
 })
 export class ListasComponent implements OnInit {
+	@ViewChild(IonList) lista: IonList
 	@Input() terminada = true
 
 	constructor(
@@ -57,6 +58,7 @@ export class ListasComponent implements OnInit {
 						if (data.titulo.length === 0) return
 						lista.titulo = data.titulo
 						this.deseosService.guardarStorage()
+						this.lista.closeSlidingItems()
 					},
 				},
 			],
