@@ -21,4 +21,8 @@ export class ListasComponent implements OnInit {
 			this.router.navigateByUrl(`/tabs/tab1/agregar/${id}`)
 		}
 	}
+
+	borrarLista(id: number) {
+		this.deseosService.borrarLista(id)
+	}
 }
